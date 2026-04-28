@@ -82,6 +82,9 @@
       z-index: 2;
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
       gap: 2.5rem;
       align-items: center;
     }
@@ -201,7 +204,7 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.5px;
       background: rgba(36,59,48,0.12);
       border: 1.5px solid rgba(36,59,48,0.12);
@@ -540,6 +543,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
+      .services-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .hero-badge { display: none; }
       .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
@@ -568,24 +572,22 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grain"></div>
-    <div class="hero-content">
-      <div class="hero-layout">
-        <div class="hero-content">
-          <span class="hero-eyebrow">Greater Boston &amp; MetroWest's Trusted Home Team</span>
-          <h1>Your home,<br><em>taken care of.</em></h1>
-          <p class="hero-sub">
-            From spotless kitchens to fresh groceries waiting in the fridge — Turner Home Management handles the details so you can focus on what matters most.
-          </p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn-primary">Request a Service</a>
-            <a href="#services" class="btn-ghost">See What We Do</a>
-          </div>
+    <div class="hero-layout">
+      <div class="hero-content">
+        <span class="hero-eyebrow">Greater Boston &amp; MetroWest's Trusted Home Team</span>
+        <h1>Your home,<br><em>taken care of.</em></h1>
+        <p class="hero-sub">
+          From spotless kitchens to fresh groceries waiting in the fridge — Turner Home Management handles the details so you can focus on what matters most.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Request a Service</a>
+          <a href="#services" class="btn-ghost">See What We Do</a>
         </div>
-        <aside class="hero-story">
-          <h3>Meet Chris &amp; Eviana Turner</h3>
-          <p>Chris and Eviana Turner bring over 15 years of home management experience, including work in luxury homes across Massachusetts. As parents of four, they understand the pace of busy family life and built Turner Home Management to deliver trusted, high-touch support that keeps every home running smoothly.</p>
-        </aside>
       </div>
+      <aside class="hero-story">
+        <h3>Meet Chris &amp; Eviana Turner</h3>
+        <p>Chris and Eviana Turner bring over 15 years of home management experience, including work in luxury homes across Massachusetts. As parents of four, they understand the pace of busy family life and built Turner Home Management to deliver trusted, high-touch support that keeps every home running smoothly.</p>
+      </aside>
     </div>
     <div class="hero-badge">
       <div class="hero-badge-ring">
