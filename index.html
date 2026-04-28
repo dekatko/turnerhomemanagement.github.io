@@ -3,10 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Turner Home Management helps Greater Boston homeowners reclaim their time with trusted cleaning, organizing, cooking, laundry, dog walking, and grocery shopping services." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
   <title>Turner Home Management — Greater Boston's Trusted Home Team</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  </noscript>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,6 +77,14 @@
       position: relative; overflow: hidden;
       background: var(--green-deep);
     }
+    .hero-layout {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
       background:
@@ -108,6 +121,29 @@
     .hero-actions {
       display: flex; gap: 1.2rem; flex-wrap: wrap;
       opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
+    }
+    .hero-story {
+      position: relative;
+      z-index: 2;
+      background: rgba(247,242,234,0.08);
+      border: 1px solid rgba(201,160,80,0.3);
+      padding: 2rem;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      animation: fadeUp 0.9s 1s forwards;
+    }
+    .hero-story h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+    .hero-story p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(247,242,234,0.8);
+      line-height: 1.85;
     }
     .btn-primary {
       display: inline-block; padding: 1rem 2.4rem;
@@ -498,10 +534,15 @@
     }
     .reviews-dot.active { background: var(--gold); }
 
+    @media (max-width: 1100px) {
+      .hero-badge { display: none; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hero-badge { display: none; }
+      .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
       .trust-band { grid-template-columns: 1fr; }
       .contact-section { grid-template-columns: 1fr; gap: 3rem; }
       .form-row { grid-template-columns: 1fr; }
@@ -528,19 +569,27 @@
     <div class="hero-bg"></div>
     <div class="hero-grain"></div>
     <div class="hero-content">
-      <span class="hero-eyebrow">Greater Boston's Trusted Home Team</span>
-      <h1>Your home,<br><em>taken care of.</em></h1>
-      <p class="hero-sub">
-        From spotless kitchens to fresh groceries waiting in the fridge — Turner Home Management handles the details so you can focus on what matters most.
-      </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Request a Service</a>
-        <a href="#services" class="btn-ghost">See What We Do</a>
+      <div class="hero-layout">
+        <div class="hero-content">
+          <span class="hero-eyebrow">Greater Boston &amp; MetroWest's Trusted Home Team</span>
+          <h1>Your home,<br><em>taken care of.</em></h1>
+          <p class="hero-sub">
+            From spotless kitchens to fresh groceries waiting in the fridge — Turner Home Management handles the details so you can focus on what matters most.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn-primary">Request a Service</a>
+            <a href="#services" class="btn-ghost">See What We Do</a>
+          </div>
+        </div>
+        <aside class="hero-story">
+          <h3>Meet Chris &amp; Eviana Turner</h3>
+          <p>Chris and Eviana Turner bring over 15 years of home management experience, including work in luxury homes across Massachusetts. As parents of four, they understand the pace of busy family life and built Turner Home Management to deliver trusted, high-touch support that keeps every home running smoothly.</p>
+        </aside>
       </div>
     </div>
     <div class="hero-badge">
       <div class="hero-badge-ring">
-        <span class="num">6</span>
+        <span class="num">9</span>
         <span class="label">Home<br>Services</span>
       </div>
     </div>
@@ -579,9 +628,24 @@
         <p>Reliable, caring walks for your four-legged family member. Exercise, fresh air, and a tail wagging when you get home.</p>
       </div>
       <div class="service-card">
-        <span class="service-icon">🛒</span>
-        <h3>Grocery Shopping</h3>
-        <p>We shop your list so your fridge is always stocked. Fresh, on time, and exactly what you asked for — no more last-minute runs.</p>
+        <span class="service-icon">✅</span>
+        <h3>Errands</h3>
+        <p>From grocery shopping and returns to day-to-day to-dos, we handle the errands that eat up your schedule so your week runs smoother.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">✈️</span>
+        <h3>Vacation Planning</h3>
+        <p>Travel planning support tailored to your preferences, from itinerary coordination to the details that make time away feel effortless.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🚗</span>
+        <h3>Car Care</h3>
+        <p>We coordinate and handle vehicle needs like servicing, detailing, inspections, and oil changes, so your car stays road-ready without disrupting your day.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🏡</span>
+        <h3>Managing Multiple Homes</h3>
+        <p>Consistent oversight for second homes and investment properties, including routine checks, vendor coordination, and readiness before every arrival.</p>
       </div>
     </div>
   </section>
@@ -600,7 +664,7 @@
         <div class="desc">Insured &amp; Vetted</div>
       </div>
       <div class="stat">
-        <div class="num">6</div>
+        <div class="num">9</div>
         <div class="desc">Expert Services</div>
       </div>
       <div class="stat">
@@ -704,126 +768,6 @@
           <p class="review-text">My service business works with Turner Home Management to help care for a few homes under their management. I can attest that they are amazing to work with! Great with communication and it is evident that they truly care about their clients' needs. Highly recommend!</p>
         </div>
 
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#D4855A;">J</div>
-            <div class="reviewer-info">
-              <div class="name">Jennifer Raines</div>
-              <div class="meta">2 years ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">So many positive things to say about Chris & Eviana of Turner Home Management. They are trustworthy, efficient, and very responsive. They are really passionate about home management in a way that is truly hard to find. As people, they are warm, kind and friendly. Highly recommend!</p>
-        </div>
-
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#78A86E;">S</div>
-            <div class="reviewer-info">
-              <div class="name">Siyi Gu</div>
-              <div class="meta">1 year ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">Eviana and her team cleaned my house since June. She's super responsive and easy to communicate with for any of my needs. She and her team are very good at house cleaning and was always super helpful. I would recommend her to any person who has house cleaning needs!</p>
-        </div>
-
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#B05E3A;">M</div>
-            <div class="reviewer-info">
-              <div class="name">Marina Buerkle</div>
-              <div class="meta">2 years ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">What I love most about Chris and Eviana is their heart behind doing truly excellent work — to BLESS people! They are probably the most hard working people I know who are always doing their utmost. I have received the blessing of their service myself and feel enriched because of it. It really is an outpouring of love and you can feel it!</p>
-        </div>
-
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#3A7DC9;">C</div>
-            <div class="reviewer-info">
-              <div class="name">Carolina Figueroa</div>
-              <div class="meta">2 years ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">We have been fortunate to work with Chris and Éviana for over 3 years and highly recommend them. As two busy executives with kids, having their help with laundry, errands, shopping, and light clean up has helped us keep our sanity and our home organized. They are trustworthy, reliable, and kind.</p>
-        </div>
-
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#8E5AA8;">M</div>
-            <div class="reviewer-info">
-              <div class="name">Marisa M</div>
-              <div class="meta">3 years ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">Chris and Eviana have literally changed our lives. They have improved our quality of life immensely. Eviana is also the most efficient, fastest organizer/cleaner I have ever met — it took her about 6 minutes to organize our cabinet of pantry items we hadn't been able to close for 2 years. I can't thank them enough!</p>
-        </div>
-
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#4A8C6A;">A</div>
-            <div class="reviewer-info">
-              <div class="name">Adam N</div>
-              <div class="meta">2 years ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">We've worked with Eviana and Chris for almost two years and cannot say enough good things about them! They are diligent, reliable, thoughtful and immensely helpful! There really has been no limit to the ways they have made our lives easier and more streamlined. Five stars, all around!</p>
-        </div>
-
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#C97A3A;">K</div>
-            <div class="reviewer-info">
-              <div class="name">Kristin Loranger</div>
-              <div class="meta">2 years ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">Have you ever wanted to clone yourself just to accomplish your everyday to-do list? Well the Turners can do that and more for you! Éviana and Chris have a "can do" attitude and are excellent communicators. Having their support means I can focus on my work knowing that they have the day to day home demands covered. I am grateful I found them!</p>
-        </div>
-
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#5A7FB0;">A</div>
-            <div class="reviewer-info">
-              <div class="name">Amram Migdal</div>
-              <div class="meta">1 year ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">Éviana and her team were incredibly helpful and flexible. We used them for laundry, tidying, cleaning and organizing. Great service!</p>
-        </div>
-
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#A04A6A;">A</div>
-            <div class="reviewer-info">
-              <div class="name">Amanda Phillips</div>
-              <div class="meta">1 year ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">Great Home Management company! Very professional, on time and work hard! I would highly recommend working with them and their team!</p>
-        </div>
-
-        <div class="review-card">
-          <div class="reviewer">
-            <div class="reviewer-avatar" style="background:#3A9C7A;">K</div>
-            <div class="reviewer-info">
-              <div class="name">Kalya Selassie</div>
-              <div class="meta">2 years ago</div>
-            </div>
-          </div>
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">What a life saver! Extremely efficient, punctual, wonderful eye for detail and such kind people. I would highly recommend and will keep using their services!</p>
-        </div>
-
       </div>
     </div>
 
@@ -837,8 +781,8 @@
   <!-- AREA -->
   <section class="area-section" id="area">
     <span class="section-eyebrow">Service Area</span>
-    <h2 class="section-title">Serving <em>Greater Boston</em></h2>
-    <p>We cover the full greater Boston metro — from downtown neighborhoods out to the MetroWest region all the way to Hopkinton.</p>
+    <h2 class="section-title">Serving <em>Greater Boston &amp; MetroWest</em></h2>
+    <p>We proudly serve Greater Boston and MetroWest, from downtown Boston neighborhoods through Cambridge, Newton, and out to Hopkinton.</p>
     <div class="area-strip">
       <span class="area-tag">Boston</span>
       <span class="area-tag">Cambridge</span>
@@ -874,7 +818,7 @@
         <div class="icon">📍</div>
         <div class="detail-text">
           <span>Service Area</span>
-          <strong>Greater Boston — out to Hopkinton</strong>
+          <strong>Greater Boston &amp; MetroWest — out to Hopkinton</strong>
         </div>
       </div>
       <div class="contact-detail">
@@ -893,26 +837,26 @@
       <div id="form-inner">
         <div class="form-row">
           <div class="form-group">
-            <label>First Name</label>
+            <label for="fname">First Name</label>
             <input type="text" placeholder="Jane" id="fname">
           </div>
           <div class="form-group">
-            <label>Last Name</label>
+            <label for="lname">Last Name</label>
             <input type="text" placeholder="Smith" id="lname">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Phone Number</label>
+            <label for="phone">Phone Number</label>
             <input type="tel" placeholder="(617) 000-0000" id="phone">
           </div>
           <div class="form-group">
-            <label>Email Address</label>
+            <label for="email">Email Address</label>
             <input type="email" placeholder="jane@email.com" id="email">
           </div>
         </div>
         <div class="form-group">
-          <label>Service Needed</label>
+          <label for="service">Service Needed</label>
           <select id="service">
             <option value="">— Select a service —</option>
             <option>Cleaning</option>
@@ -925,11 +869,11 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Your City / Town</label>
+          <label for="city">Your City / Town</label>
           <input type="text" placeholder="e.g. Newton, Natick, Framingham..." id="city">
         </div>
         <div class="form-group">
-          <label>Tell us more (optional)</label>
+          <label for="message">Tell us more (optional)</label>
           <textarea placeholder="Frequency, special requests, anything we should know..." id="message"></textarea>
         </div>
         <button class="form-submit" onclick="submitForm()">Send Request →</button>
@@ -958,7 +902,10 @@
           <li><a href="#services">Cooking</a></li>
           <li><a href="#services">Laundry</a></li>
           <li><a href="#services">Dog Walking</a></li>
-          <li><a href="#services">Grocery Shopping</a></li>
+          <li><a href="#services">Errands</a></li>
+          <li><a href="#services">Vacation Planning</a></li>
+          <li><a href="#services">Car Care</a></li>
+          <li><a href="#services">Managing Multiple Homes</a></li>
         </ul>
       </div>
       <div class="footer-links">
@@ -972,7 +919,7 @@
     </div>
     <div class="footer-bottom">
       <p>© 2025 Turner Home Management. All rights reserved.</p>
-      <p>Greater Boston, MA</p>
+      <p>Greater Boston &amp; MetroWest, MA</p>
     </div>
   </footer>
 
@@ -996,6 +943,7 @@
     const cards = track.querySelectorAll('.review-card');
     const dotsContainer = document.getElementById('reviewsDots');
     let currentSlide = 0;
+    let cardStep = 0;
 
     function getVisibleCount() {
       return window.innerWidth < 768 ? 1 : window.innerWidth < 1100 ? 2 : 3;
@@ -1003,6 +951,11 @@
 
     function totalSlides() {
       return Math.ceil(cards.length / getVisibleCount());
+    }
+
+    function updateCardStep() {
+      if (!cards.length) return;
+      cardStep = cards[0].getBoundingClientRect().width + 24;
     }
 
     function buildDots() {
@@ -1018,14 +971,17 @@
     function goTo(index) {
       const n = totalSlides();
       currentSlide = (index + n) % n;
-      const cardWidth = cards[0].offsetWidth + 24;
-      track.style.transform = `translateX(-${currentSlide * getVisibleCount() * cardWidth}px)`;
+      track.style.transform = `translateX(-${currentSlide * getVisibleCount() * cardStep}px)`;
       buildDots();
     }
 
     document.getElementById('reviewsPrev').addEventListener('click', () => goTo(currentSlide - 1));
     document.getElementById('reviewsNext').addEventListener('click', () => goTo(currentSlide + 1));
-    window.addEventListener('resize', () => goTo(0));
+    updateCardStep();
+    window.addEventListener('resize', () => {
+      updateCardStep();
+      goTo(0);
+    });
     buildDots();
 
 
