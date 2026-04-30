@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('W7VtMAjD8Ld4UZKRe');</script>
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   </noscript>
@@ -930,18 +932,45 @@
   </footer>
 
   <script>
-    function submitForm() {
-      const fname = document.getElementById('fname').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const service = document.getElementById('service').value;
+    async function submitForm() {
+      const firstName = document.getElementById('fname').value.trim();
+      const lastName  = document.getElementById('lname').value.trim();
+      const phone     = document.getElementById('phone').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const city      = document.getElementById('city').value.trim();
+      const service   = document.getElementById('service').value;
+      const message   = document.getElementById('message').value.trim();
 
-      if (!fname || !phone || !service) {
+      if (!firstName || !phone || !service) {
         alert('Please fill in at least your name, phone number, and service needed.');
         return;
       }
 
-      document.getElementById('form-inner').style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
+      const btn = document.querySelector('.form-submit');
+      const originalText = btn.textContent;
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        await emailjs.send('service_ztujn25', 'template_a9ni7qd', {
+          firstName,
+          lastName,
+          phone,
+          email:           email   || 'Not provided',
+          city:            city    || 'Not provided',
+          serviceRequested: service,
+          message:         message || 'No additional message',
+        });
+
+        document.getElementById('form-inner').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+
+      } catch (err) {
+        console.error('EmailJS error:', err);
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Something went wrong. Please call us directly at (774) 410-1923.');
+      }
     }
 
     // Reviews carousel
