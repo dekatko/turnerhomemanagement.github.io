@@ -100,9 +100,16 @@
       position: absolute; inset: 0; z-index: 1; opacity: 0.04;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
-    .hero-content { max-width: 740px; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: min(740px, 100%);
+      width: 100%;
+      overflow-wrap: break-word;
+    }
     .hero-eyebrow {
-      display: inline-block;
+      display: block;
+      max-width: 100%;
       font-size: 0.72rem; font-weight: 400; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--gold);
       border-bottom: 1px solid rgba(201, 160, 80, 0.4);
@@ -188,16 +195,18 @@
       color: rgba(247,242,234,0.5); line-height: 1.3;
     }
 
+    /* Text column flexes; photo column has a hard cap so the two never fight for width */
     .hero-split {
       position: relative; z-index: 2;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, min(31.25rem, 50vw));
       align-items: center;
-      gap: 4rem;
+      gap: clamp(2rem, 4vw, 4rem);
       max-width: 1200px;
       width: 100%;
       min-width: 0;
       margin: 0 auto;
+      overflow-x: clip;
     }
 
     .hero-content,
@@ -207,12 +216,14 @@
 
     .hero-photo-wrap {
       position: relative;
+      z-index: 1;
       display: flex;
       justify-content: center;
       align-items: center;
+      max-width: 100%;
     }
 
-    /* Frame inset: do not extend left (-12px) or it paints over the text column */
+    /* Frame inset: only extend away from the text column (right/top/bottom) */
     .hero-photo-wrap::before {
       content: '';
       position: absolute;
@@ -223,11 +234,13 @@
       border: 1px solid rgba(201, 160, 80, 0.3);
       border-radius: 4px;
       z-index: 0;
+      pointer-events: none;
     }
 
     .hero-photo {
+      display: block;
       width: 100%;
-      max-width: min(460px, 100%);
+      max-width: min(28.75rem, 100%);
       min-width: 0;
       height: 520px;
       object-fit: cover;
