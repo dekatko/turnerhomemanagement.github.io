@@ -1071,11 +1071,11 @@
       };
 
       // EmailJS call
-      const emailPromise = emailjs.send(
-        'service_ztujn25',
-        'template_a9ni7qd',
-        payload
-      );
+      //const emailPromise = emailjs.send(
+      //  'service_ztujn25',
+      //  'template_a9ni7qd',
+      //  payload
+      //);
 
       // Cloud Function call
       const functionPromise = fetch('https://us-central1-householder-e2284.cloudfunctions.net/submitInquiry', {
@@ -1083,7 +1083,8 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...payload,
-          companyId: '41fOjkO1v95KXT1t09gy',
+          companyId: 's7GTfBW47D7SjtejuSAm',
+          //companyId: '41fOjkO1v95KXT1t09gy',
           source: 'website_form',
         }),
       }).then(res => {
