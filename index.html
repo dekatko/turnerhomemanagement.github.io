@@ -1078,7 +1078,6 @@
       );
 
       // Cloud Function call
-      // CLOUD_FUNCTION_URL_HERE — replace with deployed function URL after firebase deploy
       const functionPromise = fetch('https://us-central1-householder-e2284.cloudfunctions.net/submitInquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
