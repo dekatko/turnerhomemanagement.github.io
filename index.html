@@ -1071,7 +1071,8 @@
       };
 
       // EmailJS call
-      //const emailPromise = emailjs.send(
+      const emailPromise = null;
+      // emailjs.send(
       //  'service_ztujn25',
       //  'template_a9ni7qd',
       //  payload
@@ -1094,7 +1095,7 @@
 
       // Fire both in parallel — neither blocks the other
       const [emailResult, functionResult] = await Promise.allSettled([
-        //emailPromise,
+        emailPromise,
         functionPromise,
       ]);
 
