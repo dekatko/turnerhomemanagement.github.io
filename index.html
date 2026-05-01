@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://api.emailjs.com https://us-central1-householder-e2284.cloudfunctions.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://api.emailjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
   <meta name="description" content="Turner Home Management helps Greater Boston homeowners reclaim their time with trusted cleaning, organizing, cooking, laundry, dog walking, and grocery shopping services." />
   <title>Turner Home Management — Greater Boston's Trusted Home Team</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1071,12 +1071,11 @@
       };
 
       // EmailJS call
-      const emailPromise = null;
-      // emailjs.send(
-      //  'service_ztujn25',
-      //  'template_a9ni7qd',
-      //  payload
-      //);
+      const emailPromise = emailjs.send(
+        'service_ztujn25',
+        'template_a9ni7qd',
+        payload
+      );
 
       // Cloud Function call
       const functionPromise = fetch('https://us-central1-householder-e2284.cloudfunctions.net/submitInquiry', {
@@ -1084,8 +1083,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...payload,
-          companyId: 's7GTfBW47D7SjtejuSAm',
-          //companyId: '41fOjkO1v95KXT1t09gy',
+          companyId: '41fOjkO1v95KXT1t09gy',
           source: 'website_form',
         }),
       }).then(res => {
