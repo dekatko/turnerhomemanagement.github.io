@@ -1060,22 +1060,60 @@
       btn.textContent = 'Sending…';
       btn.disabled = true;
 
-      try {
-        await emailjs.send('service_ztujn25', 'template_a9ni7qd', {
-          firstName,
-          lastName,
-          phone,
-          email:           email   || 'Not provided',
-          city:            city    || 'Not provided',
-          serviceRequested: service,
-          message:         message || 'No additional message',
-        });
+      const payload = {
+        firstName,
+        lastName,
+        phone,
+        email:            email   || 'Not provided',
+        city:             city    || 'Not provided',
+        serviceRequested: service,
+        message:          message || 'No additional message',
+      };
 
+      // EmailJS call
+      const emailPromise = emailjs.send(
+        'service_ztujn25',
+        'template_a9ni7qd',
+        payload
+      );
+
+      // Cloud Function call
+      // CLOUD_FUNCTION_URL_HERE — replace with deployed function URL after firebase deploy
+      const functionPromise = fetch('CLOUD_FUNCTION_URL_HERE', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...payload,
+          companyId: 'TURNER_COMPANY_ID_HERE',
+          source: 'website_form',
+        }),
+      }).then(res => {
+        if (!res.ok) throw new Error('Cloud Function returned ' + res.status);
+        return res.json();
+      });
+
+      // Fire both in parallel — neither blocks the other
+      const [emailResult, functionResult] = await Promise.allSettled([
+        emailPromise,
+        functionPromise,
+      ]);
+
+      const emailOk    = emailResult.status    === 'fulfilled';
+      const functionOk = functionResult.status === 'fulfilled';
+
+      if (emailOk || functionOk) {
+        // At least one succeeded — show success to the user
         document.getElementById('form-inner').style.display = 'none';
         document.getElementById('success-msg').style.display = 'block';
 
-      } catch (err) {
-        console.error('EmailJS error:', err);
+        // Log whichever one failed for debugging
+        if (!emailOk)    console.error('EmailJS failed:',         emailResult.reason);
+        if (!functionOk) console.error('Cloud Function failed:',  functionResult.reason);
+
+      } else {
+        // Both failed
+        console.error('EmailJS failed:',        emailResult.reason);
+        console.error('Cloud Function failed:', functionResult.reason);
         btn.textContent = originalText;
         btn.disabled = false;
         alert('Something went wrong. Please call us directly at (774) 410-1923.');
