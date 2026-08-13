@@ -461,14 +461,15 @@
     }
 
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 1.5px;
       background: rgba(36, 59, 48, 0.12);
       border: 1.5px solid rgba(36, 59, 48, 0.12);
     }
 
     .service-card {
+      flex: 1 1 calc(33.333% - 1px);
       background: var(--cream);
       padding: 2.8rem 2.4rem;
       position: relative;
@@ -1109,8 +1110,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .services-grid {
-        grid-template-columns: 1fr;
+      .service-card {
+        flex-basis: 100%;
       }
 
       .nav-links {
@@ -1258,6 +1259,19 @@
         <p>Consistent oversight for second homes and investment properties, including routine checks, vendor
           coordination, and readiness before every arrival.</p>
       </div>
+      <div class="service-card">
+        <span class="service-icon">🤱</span>
+        <h3>Postpartum Doula + Home Management</h3>
+        <p>Comprehensive support for your growing family. Our postpartum doula and home management package combines
+          newborn and postpartum care with hands-on household support, so you can focus on rest, recovery, and your
+          family.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📦</span>
+        <h3>Subscription Services</h3>
+        <p>Simplify your home and save with our monthly service packages. Enjoy consistent, reliable support tailored
+          to your household needs, plus 15% off services with your subscription.</p>
+      </div>
     </div>
   </section>
 
@@ -1276,7 +1290,7 @@
         <div class="desc">Insured &amp; Vetted</div>
       </div>
       <div class="stat">
-        <div class="num">9</div>
+        <div class="num">10</div>
         <div class="desc">Expert Services</div>
       </div>
       <div class="stat">
@@ -1536,6 +1550,8 @@
           <li><a href="#services">Vacation Planning</a></li>
           <li><a href="#services">Car Care</a></li>
           <li><a href="#services">Managing Multiple Homes</a></li>
+          <li><a href="#services">Postpartum Doula + Home Management</a></li>
+          <li><a href="#services">Subscription Services</a></li>
         </ul>
       </div>
       <div class="footer-links">
