@@ -82,6 +82,8 @@
       display: flex;
       align-items: baseline;
       gap: 0.4rem;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
     .nav-logo span {
@@ -91,8 +93,14 @@
 
     .nav-links {
       display: flex;
+      align-items: center;
       gap: 2.5rem;
       list-style: none;
+      flex-shrink: 0;
+    }
+
+    .nav-links li {
+      flex-shrink: 0;
     }
 
     .nav-links a {
@@ -102,6 +110,7 @@
       text-transform: uppercase;
       color: var(--text-mid);
       text-decoration: none;
+      white-space: nowrap;
       transition: color 0.2s;
     }
 
@@ -119,6 +128,29 @@
     .nav-cta:hover {
       background: var(--green-mid);
       color: var(--gold-light) !important;
+    }
+
+    /* Tighten nav spacing before links are hidden on mobile, so nothing wraps or overflows */
+    @media (max-width: 960px) {
+      nav {
+        padding: 1.4rem 4vw;
+      }
+
+      .nav-logo {
+        font-size: 1.3rem;
+      }
+
+      .nav-links {
+        gap: 1.4rem;
+      }
+
+      .nav-links a {
+        font-size: 0.72rem;
+      }
+
+      .nav-cta {
+        padding: 0.55rem 1rem;
+      }
     }
 
     /* ── HERO ── */
